@@ -1,8 +1,9 @@
 import { useRouter } from "next/router";
-import { toast } from "react-hot-toast";
+// import { toast } from "react-hot-toast";
 import { type CustomError } from "~/types/errorHandling";
 import { api } from "~/utils/api";
 import CardComponent from "./privatePublic";
+import { toast } from "~/hooks/useToaster";
 
 export const NetworkPrivatePublic = () => {
   const { query } = useRouter();
@@ -20,7 +21,7 @@ export const NetworkPrivatePublic = () => {
   const { mutate: updateNetworkMutation } =
     api.network.updateNetwork.useMutation({
       onError: ({ shape }: CustomError) => {
-        void toast.error(shape?.data?.zodError?.fieldErrors?.updateParams);
+        // void toast(shape?.data?.zodError?.fieldErrors?.updateParams);
       },
     });
 
@@ -33,12 +34,16 @@ export const NetworkPrivatePublic = () => {
       {
         onSuccess: () => {
           void refecthNetworkById();
-          toast.success(
-            `Your network is now ${
-              privateNetwork ? "private" : "public, please use with caution!"
-            }`,
-            { icon: "⚠️" }
-          );
+          toast({
+            title: "Scheduled: Catch up",
+            description: "Friday, February 10, 2023 at 5:57 PM",
+          });
+          // toast.success(
+          //   `Your network is now ${
+          //     privateNetwork ? "private" : "public, please use with caution!"
+          //   }`,
+          //   { icon: "⚠️" }
+          // );
         },
       }
     );

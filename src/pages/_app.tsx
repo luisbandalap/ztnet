@@ -8,9 +8,10 @@ import type { AppProps } from "next/app";
 import { api } from "~/utils/api";
 import { ThemeProvider } from "next-themes";
 import "~/styles/globals.css";
-import { Toaster } from "react-hot-toast";
+// import { Toaster } from "react-hot-toast";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import Modal from "~/components/elements/modal";
+import { Toaster } from "~/components/modules/toaster";
 
 // eslint-disable-next-line @typescript-eslint/ban-types
 export type NextPageWithLayout<P = {}, IP = P> = NextPage<P, IP> & {
@@ -30,7 +31,8 @@ const App: AppType<{ session: Session | null }> = ({
     <ThemeProvider defaultTheme="system">
       <Modal />
       <ReactQueryDevtools initialIsOpen={false} />
-      <Toaster
+      <Toaster />
+      {/* <Toaster
         position="bottom-right"
         toastOptions={{
           className: "bg-primary-500",
@@ -40,7 +42,7 @@ const App: AppType<{ session: Session | null }> = ({
             background: "#404040",
           },
         }}
-      />
+      /> */}
       <SessionProvider session={session}>
         {getLayout(<Component {...pageProps} />)}
       </SessionProvider>

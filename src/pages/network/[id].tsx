@@ -13,6 +13,7 @@ import EditIcon from "~/icons/edit";
 import Input from "~/components/elements/input";
 import toast from "react-hot-toast";
 import { DeletedNetworkMembersTable } from "~/components/modules/deletedNetworkMembersTable";
+import { InfoPopover } from "~/components/modules/infoPopOver";
 
 const NetworkById = () => {
   const [state, setState] = useState({
@@ -136,6 +137,7 @@ const NetworkById = () => {
             </div>
           </div>
         </div>
+
         <NetworkPrivatePublic />
       </div>
       <div className="w-5/5 mx-auto flex px-4 text-sm sm:w-4/5 sm:px-10 md:text-base">
@@ -154,6 +156,7 @@ const NetworkById = () => {
           </div>
         </div>
       </div>
+
       <div className="w-5/5 divider mx-auto flex px-4 py-4 text-sm sm:w-4/5 sm:px-10 md:text-base">
         Network Settings
       </div>
@@ -163,8 +166,23 @@ const NetworkById = () => {
           you absolutely have to.
         </p>
       </div>
-      <div className="w-5/5 mx-auto grid grid-cols-1 space-y-4 px-4 py-4 text-sm  sm:w-4/5 sm:px-10 md:text-base xl:flex">
+      <div className="mx-auto flex justify-around ">
+        <div className="">
+          <InfoPopover
+            title="Ipv4 Assignment"
+            description="IPv4 range from which to auto-assign IPs. Note that IPs will only be assigned if they also fall within a defined route. Easy mode allows users to pick an IP range and a route and pool definition will automatically be created."
+          />
+        </div>
+        <div className="">
+          <InfoPopover
+            title="Managed Routes"
+            description="IPv4 routes to be published to network members. This can be used to create routes to other networks via gateways on a ZeroTier network. Note that for security reasons most clients will not use default routes or routes that overlap with public IP address space unless this is specifically allowed by the user. Public IP ranges are marked with an icon:"
+          />
+        </div>
+      </div>
+      <div className="w-5/5 mx-auto grid grid-cols-1 space-y-4 px-4  text-sm  sm:w-4/5 sm:px-10 md:text-base xl:flex">
         {/* Ipv4 assignment  */}
+
         <div className="w-6/6 xl:w-3/6 ">
           <NetworkIpAssignment />
         </div>
